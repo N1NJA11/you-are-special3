@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Для Светочки</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 120, 170, 0.35), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(255, 210, 230, 0.25), transparent 25%),
+        linear-gradient(135deg, #170018, #31001f, #090009);
+      background-size: 140% 140%;
+      animation: bgMove 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(#fff 1px, transparent 1px),
+        radial-gradient(#ffd6e7 1px, transparent 1px);
+      background-size: 70px 70px, 120px 120px;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      min-height: 82vh;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 28px 22px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.18);
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      animation: cardIn 0.7s ease;
+    }
+
+    .card.active {
+      display: flex;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .delay1 { animation-delay: 0.25s; }
+    .delay2 { animation-delay: 0.5s; }
+    .delay3 { animation-delay: 0.75s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 58px;
+      line-height: 1;
+      margin-bottom: 18px;
+      color: #ffd8e8;
+      text-shadow: 0 0 25px rgba(255,150,190,0.55);
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 14px;
+      color: #ffe6f0;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 18px;
+    }
+
+    .big {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .photo {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 26px;
+      margin: 12px 0 18px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .photo:hover {
+      transform: scale(1.03);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.5);
+    }
+
+    .flowers {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      width: 100%;
+      margin: 18px 0;
+    }
+
+    .flowers img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.35);
+      transition: transform 0.35s ease;
+    }
+
+    .flowers img:hover {
+      transform: scale(1.02);
+    }
+
+    button {
+      margin-top: 18px;
+      border: none;
+      padding: 15px 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff6fae, #ffb3d1);
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(255,105,170,0.35);
+      transition: 0.25s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav button {
+      margin-top: 0;
+      padding: 11px 16px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.16);
+      box-shadow: none;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .heart {
+      font-size: 42px;
+      margin-bottom: 18px;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    .small {
+      font-size: 14px;
+      opacity: 0.75;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 420px) {
+      h1 { font-size: 48px; }
+      h2 { font-size: 24px; }
+      p { font-size: 15px; }
+
+      .card {
+        border-radius: 26px;
+        padding: 24px 18px;
+      }
+
+      .photo {
+        height: 390px;
+        object-position: 50% 15%;
+      }
+    }
+   .lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 120, 170, 0.35), transparent 30%),
+    linear-gradient(135deg, #170018, #31001f, #090009);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.lock-box {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  padding: 32px 24px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+}
+
+.lock-heart {
+  font-size: 42px;
+  margin-bottom: 14px;
+}
+
+.lock-box h2 {
+  margin-bottom: 10px;
+}
+
+.lock-box p {
+  margin-bottom: 20px;
+}
+
+.lock-box input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  margin-bottom: 14px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.lock-box button {
+  width: 100%;
+  margin-top: 0;
+}
+
+#error {
+  display: none;
+  margin-top: 14px;
+  color: #ff9ac5;
+  font-size: 14px;
+}
+  </style>
+</head>
+
+<body>
+  <div id="lock" class="lock-screen">
+  <div class="lock-box">
+
+    <h2>Это секрет 😌</h2>
+    <p>Введи пароль</p>
+
+    <input id="pass" type="password">
+
+    <button onclick="checkPass()">Открыть</button>
+
+    <p id="error">Неверный пароль</p>
+
+    <!-- ПОДСКАЗКА -->
+    <p class="hint">подсказка: это твоё любимое число ✨</p>
+
+  </div>
+</div>
+  <div class="app">
+
+    <section class="card active" id="page1">
+      <div class="heart fade">💗</div>
+      <h1 class="fade delay1">Просто улыбнись</h1>
+      <p class="big fade delay2">а всё остальное — потом</p>
+      <p class="fade delay3">
+        Я сделал это не для того, чтобы что-то требовать или давить.
+        Просто захотелось оставить для тебя что-то красивое,
+        лёгкое и тёплое.
+      </p>
+      <button class="fade delay3" onclick="showPage(2)">Дальше</button>
+    </section>
+
+    <section class="card" id="page2">
+      <h2 class="fade">Та самая настоящая</h2>
+
+      <img src="photo.jpg" class="photo fade delay1" alt="Фото">
+
+      <p class="fade delay2">
+        Мне нравится видеть тебя настоящей.
+        Не из-за макияжа, не из-за образа и не из-за фигуры.
+        В первую очередь я смотрю на лицо, на улыбку, на настроение.
+      </p>
+
+      <p class="fade delay2">
+        И именно такая — простая, добрая, живая и настоящая —
+        ты мне особенно нравишься.
+      </p>
+
+      <p class="fade delay3">
+        Я правда хотел бы хоть раз увидеть тебя именно такой вживую.
+        Не как идеальную картинку, а как человека, от которого становится тепло.
+      </p>
+
+      <div class="nav fade delay3">
+        <button onclick="showPage(1)">Назад</button>
+        <button onclick="showPage(3)">Дальше</button>
+      </div>
+    </section>
+
+    <section class="card" id="page3">
+      <h2 class="fade">Цветы</h2>
+
+      <div class="flowers fade delay1">
+        <img src="flowers1.jpg" alt="Букет 1">
+        <img src="flowers2.jpg" alt="Букет 2">
+        <img src="flowers3.jpg" alt="Букет 3">
+      </div>
+
+      <p class="fade delay2">
+        Я понимаю, что ты говоришь: “не нужно тратиться на цветы”.
+        И я слышу тебя.
+      </p>
+
+      <p class="fade delay2">
+        Но для меня это не просто трата.
+        Это маленький способ тебя порадовать.
+        Я не дарю цветы, чтобы что-то доказать.
+      </p>
+
+      <p class="fade delay3">
+        Я дарю их потому, что мне самому приятно делать тебе приятно.
+        И если я считаю, что ты заслуживаешь цветов —
+        значит, я хочу дарить их столько, сколько посчитаю нужным.
+      </p>
+
+      <div class="nav fade delay3">
+        <button onclick="showPage(2)">Назад</button>
+        <button onclick="showPage(4)">Дальше</button>
+      </div>
+    </section>
+
+    <section class="card" id="page4">
+      <div class="heart fade">✨</div>
+      <h2 class="fade delay1">Без давления</h2>
+
+      <p class="fade delay2">
+        Я ничего не требую и никуда не тороплю.
+        Просто хотел сделать что-то красивое для тебя.
+      </p>
+
+      <p class="fade delay2">
+        Без лишних слов, без давления, без попытки что-то навязать.
+        Просто потому что ты правда особенная.
+      </p>
+
+      <p class="fade delay3">
+        Иногда человеку хочется не спорить, не объяснять,
+        не доказывать, а просто подарить немного тепла.
+      </p>
+
+      <p class="big fade delay3">
+        Просто улыбнись…<br>
+        а всё остальное — потом 😌
+      </p>
+
+      <div class="nav fade delay3">
+        <button onclick="showPage(3)">Назад</button>
+        <button onclick="showPage(1)">В начало</button>
+      </div>
+
+      <p class="small fade delay3">для Светочки 💗</p>
+    </section>
+
+  </div>
+
+  <script>
+    function showPage(num) {
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.98)';
+      });
+
+      setTimeout(() => {
+        cards.forEach(card => {
+          card.classList.remove('active');
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+        });
+
+        const next = document.getElementById('page' + num);
+        next.classList.add('active');
+
+        const animatedElements = next.querySelectorAll('.fade');
+        animatedElements.forEach(el => {
+          el.style.animation = 'none';
+          el.offsetHeight;
+          el.style.animation = '';
+        });
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 220);
+    }
+    function checkPass() {
+  const password = document.getElementById('pass').value;
+
+  if (password === "7") {
+    document.getElementById('lock').style.display = 'none';
+  } else {
+    document.getElementById('error').style.display = 'block';
+  }
+}
+  </script>
+</body>
+</html>
